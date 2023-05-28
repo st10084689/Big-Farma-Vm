@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Big_Farma</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+   @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
     <link rel="stylesheet" href="~/Big_Farma.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/homeController.css"/>
+    <link rel="stylesheet" href="~/css/BootsWatchTheme.css"/>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #95CF87;">
             <div class="container-fluid">
-                <a class="navbar-brand" sp-controller="Home" asp-action="Index">Category</a>
+                <a class="navbar-brand" sp-controller="Home" asp-area="Customer" asp-controller="Home" asp-action="Index"><img src="~/images/carousel/Logo.svg"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor03">
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link active text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">
                                 Home
@@ -44,7 +45,7 @@
                         }
                         @if (User.IsInRole("Customer"))
                         {
-                            <li class="nav-item ">
+                            <li class="nav-item nav-link active text-light">
                                     <a class="dropdown-item" asp-area="admin" asp-controller="Product" asp-action="Index">Product</a>
                             </li>
                         }
@@ -52,26 +53,67 @@
                        <partial name="_loginPartial" />
                     </ul>
                     <div class="d-flex">
-                        @*<button class="btn btn-secondary my-2 my-sm-0" type="submit" >
-                             Add Stock</button>*@
 
-                         <a class="btn btn-secondary my-2 my-sm-0" asp-area="admin" asp-controller="Product" asp-action="upsert">Add stock</a>
+
+                        <a class="btn  my-2 my-sm-0 " style="background-color: #7DB46F;" asp-area="admin" asp-controller="Product" asp-action="upsert">Add stock</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Big_Farma - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+  
+    <footer class=" text-center text-white" style="background-color: #95CF87;">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Text -->
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Links:</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a asp-area="admin" asp-controller="Product" asp-action="Index" class="text-white nav-link ">Products</a>
+                            </li>
+                            <li>
+                                <a asp-area="admin" asp-controller="Product" asp-action="Upsert" class="text-white nav-link ">Add Stock</a>
+                            </li>
+                            <li>
+                                <a asp-area="Identity" asp-page="/Account/Login" class="text-white nav-link ">Login</a>
+                            </li>
+                            <li>
+                                <a asp-area="Identity" asp-page="/Account/Register" class="text-white nav-link ">Register</a>
+                            </li>
+                        </ul>
+                    </div>
+                  
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
         </div>
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 Copyright:
+            <a asp-area="customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+        <!-- Copyright -->
     </footer>
+
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

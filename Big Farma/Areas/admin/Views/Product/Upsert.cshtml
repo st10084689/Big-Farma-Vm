@@ -29,11 +29,15 @@
                     <input asp-for="product.ProductName" class="form-control" />
                     <span asp-validation-for="product.ProductName" class="text-bg-danger"></span>
                 </div>
-                <div class="mb-3">
+                @*<div class="mb-3">
                     <label asp-for="product.ProductDescription">
                     </label>
                     <textarea asp-for="product.ProductDescription" rows="3" class="form-control"></textarea>
                     <span asp-validation-for="product.ProductDescription" class="text-bg-danger"></span>
+                </div>*@
+                <div class="form-group mb-3">
+                    <label asp-for="product.ProductDescription"></label>
+                    <input asp-for="product.ProductDescription" class="form-control"/>
                 </div>
                 <div class="mb-3  col-6 ">
                     <label asp-for="product.Price">

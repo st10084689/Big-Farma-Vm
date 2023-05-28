@@ -25,7 +25,7 @@ namespace Big_Farma.Areas.admin.Controllers
         _unitOfWork = unitOfWork;
         _HostEnvironment = HostEnviroment;
     }
-        
+        [Authorize]
         public IActionResult Index()
         {
             var claimIdentity = (ClaimsIdentity)User.Identity;

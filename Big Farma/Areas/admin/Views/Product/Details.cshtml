@@ -1,5 +1,5 @@
 ﻿@model Big_Farma.ViewModel.ProductVm
-
+<div class="container">
 <form method="post">
     <input hidden asp-for="product.ID" />
     <div class="card  container pt-4">
@@ -37,10 +37,11 @@
         <div class="card-footer">
             <div class="row">
                 <div class="col-12 col-md-12 pb-1">
-                    <a class="btn btn-success form-control " style="height:50px;" asp-area="Product" asp-action="Index">Back to Home</a>
+                    <a class="btn btn-success form-control " style="height:50px;" asp-area="admin" asp-controller="Product" asp-action="Index">Back to Home</a>
                 </div>
                
             </div>
         </div>
     </div>
 </form>
+</div>

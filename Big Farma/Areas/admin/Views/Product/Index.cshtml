@@ -4,19 +4,30 @@
 @model IEnumerable<Product>
 
 @{
-    ViewData["Title"] = "GetTable";
+    ViewData["Title"] = "Index";
 }
-
-<h1>GetTable</h1>
-<button id="sortButton">Sort Prices</button>
-<button id="sortDateButton">Sort Dates</button>
-
+<div class="container">
+<h1>Products</h1>
+    <button class="btn btn-info" id="sortButton">Sort Prices</button>
+    <button class="btn btn-danger" id="sortDateButton">Sort Dates</button>
+    @if(User.IsInRole("Admin")){
+    <div class="form-group">
+        <label for="exampleSelect1" class="form-label mt-4">Select Specific Farmer</label>
+        <select class="form-select" id="exampleSelect1">
+            <option value="">All</option>
+            @foreach (var user in Model.Select(m => m.applicationUser.Name).Distinct())
+            {
+                <option value="@user">@user</option>
+            }
+        </select>
+    </div>
+    }
 <p>
-    <a asp-action="Create">Create New</a>
+        <a asp-area="admin" asp-controller="Product" asp-action="Upsert" class="btn btn-lg btn-primary mt-2">Create New</a>
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
-        <tr>
+            <tr class="table-secondary" >
             <th>
                 @Html.DisplayNameFor(model => model.ProductName)
             </th>
@@ -29,14 +40,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.category.CategoryName)
             </th>
-            
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>
+                       Farmer
+                </th>
+            }
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+                <tr data-user ="@item.applicationUser.Name">
                 <td>
                     @Html.DisplayFor(modelItem => item.ProductName)
                 </td>
@@ -49,13 +65,17 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.category.CategoryName)
                 </td>
-                @*@if(User.IsInRole("Admin")){*@
+                @if(User.IsInRole("Admin")){
                 <td>
-                    @Html.DisplayFor(modelItem => item.applicationUser.Name)
+                    Name:
+                    @Html.DisplayFor(modelItem => item.applicationUser.Name)<br>
+                    Email:
+                    @Html.DisplayFor(modelItem=> item.applicationUser.Email)
                 </td>
-                @* }*@
+
+                 }
                 <td>
-                    <a asp-action="Upsert" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Upsert"  asp-route-id="@item.ID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
@@ -63,6 +83,7 @@
         }
     </tbody>
 </table>
+</div>
 <script>
     var ascendingOrder = true;
     var ascendingDateOrder = true;
@@ -104,6 +125,18 @@
         });
 
         ascendingDateOrder = !ascendingDateOrder;
+    });
+    document.getElementById("exampleSelect1").addEventListener("change", function () {
+        var selectedUser = this.value;
+        var tableRows = document.querySelectorAll("tbody tr");
+
+        tableRows.forEach(function (row) {
+            if (selectedUser === "" || row.getAttribute("data-user") === selectedUser) {
+                row.style.display = "table-row";
+            } else {
+                row.style.display = "none";
+            }
+        });
     });
 </script>
 
