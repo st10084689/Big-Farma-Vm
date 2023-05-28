@@ -2,6 +2,7 @@
 
 namespace Big_Farma.Models
 {
+   
     public class Category
     {
         [Key]

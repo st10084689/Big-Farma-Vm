@@ -11,8 +11,8 @@ using System.Security.Claims;
 
 namespace Big_Farma.Areas.admin.Controllers
 {
-    
-    [Area("admin")]
+    [Area("Employee")]
+    [Authorize]
     public class ProductController : Controller
     {
         public CustomerStockVm CustomerStock { get; set; }
@@ -32,7 +32,7 @@ namespace Big_Farma.Areas.admin.Controllers
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
 
-            if (User.IsInRole("Admin"))
+            if (User.IsInRole("Employee"))
             {
                 CustomerStock = new CustomerStockVm()
                 {
@@ -51,8 +51,8 @@ namespace Big_Farma.Areas.admin.Controllers
 
         }
 
-        //get
-        [Authorize]
+        //get method of upsert
+       
         public IActionResult Upsert(int? id)
     {
         ProductVm productVm = new()
@@ -66,12 +66,7 @@ namespace Big_Farma.Areas.admin.Controllers
            
         };
 
-        //IEnumerable<SelectListItem> CoverTypeList = _unitOfWork.coverType.GetAll().Select(
-        // u => new SelectListItem
-        // {
-        //     Text = u.Name,
-        //     Value = u.ID.ToString()
-        // });
+        
 
         if (id == null || id == 0)
         {
@@ -145,7 +140,7 @@ namespace Big_Farma.Areas.admin.Controllers
             }
             return View(obj);
         }
-
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _unitOfWork.product == null)
@@ -181,7 +176,7 @@ namespace Big_Farma.Areas.admin.Controllers
              _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
-
+        
         public IActionResult Details(int? id)
         {
             if (id == null || _unitOfWork.product == null)
@@ -206,77 +201,7 @@ namespace Big_Farma.Areas.admin.Controllers
 
 
 
-        //public IActionResult GetTable()
-        //{
-        //    var claimIdentity = (ClaimsIdentity)User.Identity;
-        //    var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-
-        //    if (User.IsInRole("Admin"))
-        //    {
-        //        CustomerStock = new CustomerStockVm()
-        //        {
-        //            ListProducts = _unitOfWork.product.GetAll(includeProperties:"category,applicationUser")
-        //        };
-        //    }
-        //    else { 
-        //    CustomerStock = new CustomerStockVm()
-        //    {
-        //        ListProducts = _unitOfWork.product.GetAll(u => u.ApplicationIdentity == claim.Value, includeProperties: "category,applicationUser")
-        //    };
-        //    }
-        //    return View(CustomerStock.ListProducts); ;
-        //}
-
-
-
-        //    #region API CALLS
-        //    [HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //        var claimIdentity = (ClaimsIdentity)User.Identity;
-        //        var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        //        //if (User.IsInRole("Admin"))
-        //        //{
-
-        //        //    var ListProducts = _unitOfWork.product.GetAll(includeProperties: "category");
-        //        //    return Json(new { data = ListProducts });
-        //        //}
-
-        //        //else
-        //        //{
-        //        var ListProducts = _unitOfWork.product.GetAll(/*u => u.ApplicationIdentity == claim.Value,*/ includeProperties: "category");
-        //            return Json(new { data = ListProducts });
-
-        //        //}
-
-
-        //}
-        //[HttpDelete]
-        //public IActionResult Delete(int? id)
-        //{
-        //    var obj = _unitOfWork.product.GetFirstOrDefault(u => u.ID == id);
-        //    if (obj == null)
-        //    {
-        //        return Json(new { success = false, message = "error while deleting" });
-        //    }
-        //    if (obj.ImageUrl != null)
-        //    {
-        //        var oldImagePath = Path.Combine(_HostEnvironment.WebRootPath, obj.ImageUrl.TrimStart('\\'));
-        //        if (System.IO.File.Exists(oldImagePath))
-        //        {
-        //            System.IO.File.Delete(oldImagePath);
-        //        }
-        //    }
-
-
-        //    _unitOfWork.product.Remove(obj);
-        //    _unitOfWork.Save();
-        //    return Json(new { success = true, message = "deleting successfull" });
-
-
-        //}
-        //#endregion
+       
 
     }
 

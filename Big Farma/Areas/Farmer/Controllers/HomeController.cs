@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Big_Farma.Controllers
 {
-    [Area("customer")]
+    [Area("Farmer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

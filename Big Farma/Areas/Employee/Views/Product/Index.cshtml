@@ -10,7 +10,7 @@
 <h1>Products</h1>
     <button class="btn btn-info" id="sortButton">Sort Prices</button>
     <button class="btn btn-danger" id="sortDateButton">Sort Dates</button>
-    @if(User.IsInRole("Admin")){
+    @if(User.IsInRole("Employee")){
     <div class="form-group">
         <label for="exampleSelect1" class="form-label mt-4">Select Specific Farmer</label>
         <select class="form-select" id="exampleSelect1">
@@ -23,7 +23,7 @@
     </div>
     }
 <p>
-        <a asp-area="admin" asp-controller="Product" asp-action="Upsert" class="btn btn-lg btn-primary mt-2">Create New</a>
+        <a asp-area="Employee" asp-controller="Product" asp-action="Upsert" class="btn btn-lg btn-primary mt-2">Create New</a>
 </p>
 <table class="table table-hover">
     <thead>
@@ -40,7 +40,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.category.CategoryName)
             </th>
-                @if (User.IsInRole("Admin"))
+                @if (User.IsInRole("Employee"))
                 {
                     <th>
                        Farmer
@@ -65,7 +65,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.category.CategoryName)
                 </td>
-                @if(User.IsInRole("Admin")){
+                    @if (User.IsInRole("Employee"))
+                    {
                 <td>
                     Name:
                     @Html.DisplayFor(modelItem => item.applicationUser.Name)<br>

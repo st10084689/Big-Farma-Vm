@@ -14,16 +14,16 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #95CF87;">
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #7DB46F;">
             <div class="container-fluid">
-                <a class="navbar-brand" sp-controller="Home" asp-area="Customer" asp-controller="Home" asp-action="Index"><img src="~/images/carousel/Logo.svg"/></a>
+                <a class="navbar-brand" sp-controller="Home" asp-area="Farmer" asp-controller="Home" asp-action="Index"><img src="~/images/carousel/Logo.svg"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor03">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                            <a class="nav-link active text-light" asp-area="Farmer" asp-controller="Home" asp-action="Index">
                                 Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
@@ -31,22 +31,22 @@
                         <li class="nav-item">
 
                         </li>
-                        @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole("Employee"))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Content Mangement</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" asp-area="admin" asp-controller="Categories" asp-action="Index">Category</a>
-                                    <a class="dropdown-item" asp-area="admin" asp-controller="Product" asp-action="Index">Product</a>
+                                    <a class="dropdown-item" asp-area="Employee" asp-controller="Categories" asp-action="Index">Category</a>
+                                    <a class="dropdown-item" asp-area="Employee" asp-controller="Product" asp-action="Index">Product</a>
                                     <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Create a user</a>
 
                                 </div>
                             </li>
                         }
-                        @if (User.IsInRole("Customer"))
+                        @if (User.IsInRole("Farmer"))
                         {
                             <li class="nav-item nav-link active text-light">
-                                    <a class="dropdown-item" asp-area="admin" asp-controller="Product" asp-action="Index">Product</a>
+                                    <a class="dropdown-item" asp-area="Employee" asp-controller="Product" asp-action="Index">Product</a>
                             </li>
                         }
 
@@ -55,7 +55,7 @@
                     <div class="d-flex">
 
 
-                        <a class="btn  my-2 my-sm-0 " style="background-color: #7DB46F;" asp-area="admin" asp-controller="Product" asp-action="upsert">Add stock</a>
+                        <a class="btn  my-2 my-sm-0 " style="background-color: #95CF87; color:white" asp-area="Employee" asp-controller="Product" asp-action="upsert">Add Stock</a>
                     </div>
                 </div>
             </div>
@@ -82,10 +82,10 @@
 
                         <ul class="list-unstyled mb-0">
                             <li>
-                                <a asp-area="admin" asp-controller="Product" asp-action="Index" class="text-white nav-link ">Products</a>
+                                <a asp-area="Employee" asp-controller="Product" asp-action="Index" class="text-white nav-link ">Products</a>
                             </li>
                             <li>
-                                <a asp-area="admin" asp-controller="Product" asp-action="Upsert" class="text-white nav-link ">Add Stock</a>
+                                <a asp-area="Employee" asp-controller="Product" asp-action="Upsert" class="text-white nav-link ">Add Stock</a>
                             </li>
                             <li>
                                 <a asp-area="Identity" asp-page="/Account/Login" class="text-white nav-link ">Login</a>
@@ -106,7 +106,7 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2023 Copyright:
-            <a asp-area="customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a asp-area="Farmer" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
         <!-- Copyright -->
     </footer>

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Big_Farma.Models
 {
+    //product model for the the list of products for the farmers
     public class Product
     {
         [Key]
@@ -15,9 +16,10 @@ namespace Big_Farma.Models
 
         public int Price { get; set; }
 
+      
+
         public DateTime DateTime { get; set; } = DateTime.Now;
 
-        public int MyProperty { get; set; }
 
         [ValidateNever]
         public string? ImageUrl { get; set; }

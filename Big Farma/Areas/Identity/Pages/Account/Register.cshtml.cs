@@ -167,7 +167,7 @@ namespace Big_Farma.Areas.Identity.Pages.Account
 
                     if (Input.role == null)
                     {
-                        await _userManager.AddToRoleAsync(user, "Customer"); 
+                        await _userManager.AddToRoleAsync(user, "Farmer"); 
                     }
                     else
                     {

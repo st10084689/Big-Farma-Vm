@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Big_Farma.Areas.admin.Controllers
 {
-    [Area("admin")]
-    [Authorize(Roles = "Admin")]
+    [Area("Employee")]
+    [Authorize(Roles = "Employee")]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,7 @@ namespace Big_Farma.Areas.admin.Controllers
             _context = context;
         }
         
-        // GET: admin/Categories
+        // GET: Farmer/Categories
         public async Task<IActionResult> Index()
         {
               return _context.Categories != null ? 
@@ -30,7 +30,7 @@ namespace Big_Farma.Areas.admin.Controllers
                           Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
         }
 
-        // GET: admin/Categories/Details/5
+        // GET: Farmer/Categories/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -48,13 +48,13 @@ namespace Big_Farma.Areas.admin.Controllers
             return View(category);
         }
 
-        // GET: admin/Categories/Create
+        // GET: Farmer/Categories/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: admin/Categories/Create
+        // POST: Farmer/Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -70,7 +70,7 @@ namespace Big_Farma.Areas.admin.Controllers
             return View(category);
         }
 
-        // GET: admin/Categories/Edit/5
+        // GET: Farmer/Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -86,7 +86,7 @@ namespace Big_Farma.Areas.admin.Controllers
             return View(category);
         }
 
-        // POST: admin/Categories/Edit/5
+        // POST: Farmer/Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -121,7 +121,7 @@ namespace Big_Farma.Areas.admin.Controllers
             return View(category);
         }
 
-        // GET: admin/Categories/Delete/5
+        // GET: Farmer/Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -139,7 +139,7 @@ namespace Big_Farma.Areas.admin.Controllers
             return View(category);
         }
 
-        // POST: admin/Categories/Delete/5
+        // POST: Farmer/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

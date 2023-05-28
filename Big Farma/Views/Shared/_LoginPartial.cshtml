@@ -4,7 +4,7 @@
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User)&&User.IsInRole("Customer"))
+@if (SignInManager.IsSignedIn(User)&&User.IsInRole("Farmer"))
 {
     <li class="nav-item">
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
@@ -15,7 +15,7 @@
         </form>
     </li>
 }
-    @if (SignInManager.IsSignedIn(User)&&User.IsInRole("Admin"))
+    @if (SignInManager.IsSignedIn(User)&&User.IsInRole("Employee"))
     {
         <li class="nav-item">
             <a id="manage" class="nav-link text-danger" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>

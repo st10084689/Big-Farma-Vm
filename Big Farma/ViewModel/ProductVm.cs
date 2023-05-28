@@ -6,6 +6,7 @@ namespace Big_Farma.ViewModel
 {
     public class ProductVm
     {
+        // This class represents the ViewModel for the Product entity.
         public Product product { get; set; }
 
 
