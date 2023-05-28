@@ -1,0 +1,109 @@
+﻿
+<partial name="_Notification" />
+
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "GetTable";
+}
+
+<h1>GetTable</h1>
+<button id="sortButton">Sort Prices</button>
+<button id="sortDateButton">Sort Dates</button>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.category.CategoryName)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category.CategoryName)
+                </td>
+                @*@if(User.IsInRole("Admin")){*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.applicationUser.Name)
+                </td>
+                @* }*@
+                <td>
+                    <a asp-action="Upsert" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    var ascendingOrder = true;
+    var ascendingDateOrder = true;
+
+    document.getElementById("sortButton").addEventListener("click", function () {
+        var tableBody = document.querySelector("tbody");
+        var rows = tableBody.querySelectorAll("tr");
+        var rowsArray = Array.from(rows);
+
+        rowsArray.sort(function (a, b) {
+            var priceA = parseFloat(a.cells[1].textContent);
+            var priceB = parseFloat(b.cells[1].textContent);
+            return ascendingOrder ? priceA - priceB : priceB - priceA;
+        });
+
+        tableBody.innerHTML = "";
+
+        rowsArray.forEach(function (row) {
+            tableBody.appendChild(row);
+        });
+
+        ascendingOrder = !ascendingOrder;
+    });
+    document.getElementById("sortDateButton").addEventListener("click", function () {
+        var tableBody = document.querySelector("tbody");
+        var rows = tableBody.querySelectorAll("tr");
+        var rowsArray = Array.from(rows);
+
+        rowsArray.sort(function (a, b) {
+            var dateA = new Date(a.cells[2].textContent);
+            var dateB = new Date(b.cells[2].textContent);
+            return ascendingDateOrder ? dateA - dateB : dateB - dateA;
+        });
+
+        tableBody.innerHTML = "";
+
+        rowsArray.forEach(function (row) {
+            tableBody.appendChild(row);
+        });
+
+        ascendingDateOrder = !ascendingDateOrder;
+    });
+</script>
+
