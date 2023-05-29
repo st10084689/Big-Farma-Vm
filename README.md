@@ -63,7 +63,7 @@ To run the Big Farma project locally, follow these steps:
 
 8. Open your web browser and visit `http://localhost:5000` to access the Big Farma application.
 
-	##FAQ
+	#FAQ
 
 1.WILL IT WORK ON ANY DEVICE:
   It will work on any device, the migration and database will run automatically if the user runs the compiles the application.
@@ -74,7 +74,7 @@ To run the Big Farma project locally, follow these steps:
 
 
 
-## License
+# License
 
 [MIT License](LICENSE).
 
